@@ -11,11 +11,12 @@ env:
   global:
     - ROS_DISTRO="melodic"
     - BUILDER="colcon"
-    - CODE_COVERAGE=codecov.io
+    - CODE_COVERAGE="coveralls.io"
   matrix:
     - ROS_REPO=main
 install:
   - git clone --quiet --depth 1 https://github.com/Briancbn/industrial_ci.git .industrial_ci -b pr-coverage
 script:
   - .industrial_ci/travis.sh
-  - bash <(curl -s https://codecov.io/bash) -Z
+  - pip install --user coveralls
+  - coveralls --merge=.ici_coverage_report/coverage.json
