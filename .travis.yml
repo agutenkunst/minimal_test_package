@@ -1,5 +1,5 @@
 language: generic
-dist: trusty
+dist: bionic
 os: linux
 
 notifications:
@@ -16,7 +16,6 @@ env:
     - ROS_REPO=main
 install:
   - git clone --quiet --depth 1 https://github.com/Briancbn/industrial_ci.git .industrial_ci -b pr-coverage
+  - git --git-dir=.industrial_ci/.git rev-parse HEAD
 script:
   - .industrial_ci/travis.sh
-  - pip install --user coveralls
-  - coveralls --merge=.ici_coverage_report/coverage.json
